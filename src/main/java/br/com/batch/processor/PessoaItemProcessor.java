@@ -1,7 +1,12 @@
-package br.com.batch.model;
+package br.com.batch.processor;
 
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+import br.com.batch.model.Pessoa;
+
+@Component
 public class PessoaItemProcessor implements ItemProcessor<Pessoa, Pessoa> {
 
 	@Override
@@ -13,6 +18,12 @@ public class PessoaItemProcessor implements ItemProcessor<Pessoa, Pessoa> {
 		System.out.println(pessoa);
 		
 		return pessoa;
+	}
+	
+	
+	@Bean
+	public PessoaItemProcessor getProcess() {
+		return new PessoaItemProcessor();
 	}
 
 }
