@@ -41,6 +41,7 @@ public class BathConfiguration {
 	
 	@Bean
 	public Step step1() {
+		
 		return stepBuilderFactory.get("step1").<Pessoa,Pessoa>chunk(10)
 				.reader(pessoaFlatFileReader.getPessoaFlatFileReader())
 				.processor(pessoaItemProcessor.getProcess())
