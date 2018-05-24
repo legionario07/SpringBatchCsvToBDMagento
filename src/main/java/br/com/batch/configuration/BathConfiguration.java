@@ -15,6 +15,7 @@ import br.com.batch.processor.PessoaItemProcessor;
 import br.com.batch.readers.PessoaFieldSetMapper;
 import br.com.batch.readers.PessoaFlatFileReader;
 import br.com.batch.writers.PessoaJdbcBatchItemWriter;
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Configuration
 @EnableBatchProcessing
@@ -41,8 +42,18 @@ public class BathConfiguration {
 	
 	@Bean
 	public Step step1() {
-		
+		System.out.println("STEP 1");
 		return stepBuilderFactory.get("step1").<Pessoa,Pessoa>chunk(10)
+				.reader(pessoaFlatFileReader.getPessoaFlatFileReader())
+				.processor(pessoaItemProcessor.getProcess())
+				.writer(pessoaJdbcBatchItemWriter.getWriter())
+				.build();
+	}
+	
+	@Bean
+	public Step step2() {
+		System.out.println("STEP 2");
+		return stepBuilderFactory.get("step2").<Pessoa,Pessoa>chunk(10)
 				.reader(pessoaFlatFileReader.getPessoaFlatFileReader())
 				.processor(pessoaItemProcessor.getProcess())
 				.writer(pessoaJdbcBatchItemWriter.getWriter())
@@ -54,6 +65,7 @@ public class BathConfiguration {
 		return jobBuilderFactory.get("exportPessoaJob")
 				.incrementer(new RunIdIncrementer())
 				.flow(step1())
+				.next(step2())
 				.end()
 				.build();
 				
