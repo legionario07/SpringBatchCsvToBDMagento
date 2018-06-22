@@ -7,25 +7,25 @@ import org.springframework.stereotype.Component;
 
 import br.com.batch.configuration.DbConfig;
 import br.com.batch.databases.DataSourceConfiguration;
-import br.com.batch.databases.PessoaItemPreparedStatementSetter;
-import br.com.batch.model.Pessoa;
+import br.com.batch.databases.SaveItemPreparedStatementSetter;
+import br.com.batch.model.SaveItem;
 
 @Component
-public class PessoaJdbcBatchItemWriter {
+public class SaveJdbcBatchItemWriter {
 
 	@Autowired
 	DataSourceConfiguration dataSource;
 	
 	@Autowired
-	PessoaItemPreparedStatementSetter itemPreparedStatementSetter;
+	SaveItemPreparedStatementSetter itemPreparedStatementSetter;
 
 	@Autowired
 	DbConfig dbConfig;
 	
 	@Bean
-	public JdbcBatchItemWriter<Pessoa> getWriter(){
+	public JdbcBatchItemWriter<SaveItem> getWriter(){
 		
-		JdbcBatchItemWriter<Pessoa> writer = new JdbcBatchItemWriter<Pessoa>();
+		JdbcBatchItemWriter<SaveItem> writer = new JdbcBatchItemWriter<SaveItem>();
 		writer.setDataSource(dataSource.getDataSource());
 		writer.setItemPreparedStatementSetter(itemPreparedStatementSetter.getSetter());
 		writer.setSql(dbConfig.getSqlSave());

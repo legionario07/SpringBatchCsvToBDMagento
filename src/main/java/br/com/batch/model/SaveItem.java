@@ -1,16 +1,20 @@
 package br.com.batch.model;
 
-public class Pessoa {
+import java.util.HashMap;
+import java.util.Map;
+
+public class SaveItem {
 
 	private String nome;
 	private Integer idade;
 	private String mae;
+	private Map<String, String> data;
 	
-	public Pessoa() {
-		
+	public SaveItem() {
+		data = new HashMap<String, String>();
 	}
 	
-	public Pessoa(String nome, Integer idade, String mae) {
+	public SaveItem(String nome, Integer idade, String mae) {
 		this();
 		this.nome = nome;
 		this.idade = idade;
@@ -39,6 +43,14 @@ public class Pessoa {
 	@Override
 	public String toString() {
 		return "Pessoa [nome=" + nome + ", idade=" + idade + ", mae=" + mae + "]";
+	}
+
+	public Map<String, String> getData() {
+		return data;
+	}
+
+	public void setData(Map<String, String> data) {
+		this.data = data;
 	}
 	
 }

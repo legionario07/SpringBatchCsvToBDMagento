@@ -10,4 +10,6 @@ public class SpringBatchCsvToBDApplication {
 		SpringApplication.run(SpringBatchCsvToBDApplication.class, args);
 		
 	}
+
+	
 }
