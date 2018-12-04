@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import br.com.batch.model.SaveItem;
+import br.com.batch.listener.InterceptingJobExecution;
+import br.com.batch.model.Produto;
 import br.com.batch.processor.SaveItemProcessor;
-import br.com.batch.readers.SaveItemFieldSetMapper;
-import br.com.batch.readers.SaveItemFlatFileReader;
+import br.com.batch.readers.ProdutoItemFieldSetMapper;
+import br.com.batch.readers.ProdutoItemFlatFileReader;
 import br.com.batch.writers.SaveJdbcBatchItemWriter;
 
 @Configuration
@@ -27,10 +28,10 @@ public class BatchConfiguration {
 	public StepBuilderFactory stepBuilderFactory;
 	
 	@Autowired
-	SaveItemFieldSetMapper saveItemFieldSetMapper;
+	ProdutoItemFieldSetMapper saveItemFieldSetMapper;
 	
 	@Autowired
-	SaveItemFlatFileReader saveItemFlatFileReader;
+	ProdutoItemFlatFileReader saveItemFlatFileReader;
 	
 	@Autowired
 	SaveJdbcBatchItemWriter saveJdbcBatchItemWriter;
@@ -40,15 +41,16 @@ public class BatchConfiguration {
 	
 	@Autowired
 	InterceptingJobExecution interceptingJobExecution;
-	
+
+
 	
 	@Bean
 	public Step step1() {
 		System.out.println("STEP 1");
-		return stepBuilderFactory.get("step1").<SaveItem,SaveItem>chunk(10)
+		return stepBuilderFactory.get("step1").<Produto,Produto>chunk(10)
 				.reader(saveItemFlatFileReader.getSaveItemFlatFileReader())
-				.processor(saveItemProcessor.getProcess())
-				.writer(saveJdbcBatchItemWriter.getWriter())
+				.processor(saveItemProcessor)
+				.writer(saveJdbcBatchItemWriter)
 				.build();
 	}
 	

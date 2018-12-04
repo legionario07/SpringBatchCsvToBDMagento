@@ -13,6 +13,8 @@ public class CsvConfig {
 
 	private String nameFile;
 	private String split;
+	private String campoPrecoCompra;
+	private String campoPrecoVenda;
 	private List<String> namesCols;
 	
 	public String getNameFile() {
@@ -45,6 +47,18 @@ public class CsvConfig {
 		
 		return namesToArrays;
 		
+	}
+	public String getCampoPrecoCompra() {
+		return campoPrecoCompra;
+	}
+	public void setCampoPrecoCompra(String campoPrecoCompra) {
+		this.campoPrecoCompra = campoPrecoCompra;
+	}
+	public String getCampoPrecoVenda() {
+		return campoPrecoVenda;
+	}
+	public void setCampoPrecoVenda(String campoPrecoVenda) {
+		this.campoPrecoVenda = campoPrecoVenda;
 	}
 	
 }

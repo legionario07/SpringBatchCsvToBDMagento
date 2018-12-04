@@ -9,20 +9,11 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class DbConfig {
 
-	private String sqlSave;
 	private String url;
 	private String username;
 	private String password;
 	private String driverClassName;
 	
-
-	public String getSqlSave() {
-		return sqlSave;
-	}
-
-	public void setSqlSave(String sqlSave) {
-		this.sqlSave = sqlSave;
-	}
 
 	public String getUrl() {
 		return url;

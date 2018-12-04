@@ -1,36 +1,25 @@
 package br.com.batch.writers;
 
-import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
 
-import br.com.batch.configuration.DbConfig;
-import br.com.batch.databases.DataSourceConfiguration;
-import br.com.batch.databases.SaveItemPreparedStatementSetter;
-import br.com.batch.model.SaveItem;
+import br.com.batch.model.Produto;
 
 @Component
-public class SaveJdbcBatchItemWriter {
+public class SaveJdbcBatchItemWriter implements ItemWriter<Produto> {
 
-	@Autowired
-	DataSourceConfiguration dataSource;
+	public static final Logger logger = LoggerFactory.getLogger(SaveJdbcBatchItemWriter.class);
 	
-	@Autowired
-	SaveItemPreparedStatementSetter itemPreparedStatementSetter;
 
-	@Autowired
-	DbConfig dbConfig;
-	
-	@Bean
-	public JdbcBatchItemWriter<SaveItem> getWriter(){
+	@Override
+	public void write(List<? extends Produto> items) throws Exception {
 		
-		JdbcBatchItemWriter<SaveItem> writer = new JdbcBatchItemWriter<SaveItem>();
-		writer.setDataSource(dataSource.getDataSource());
-		writer.setItemPreparedStatementSetter(itemPreparedStatementSetter.getSetter());
-		writer.setSql(dbConfig.getSqlSave());
 		
-		return writer;
+		
 	}
 	
 }

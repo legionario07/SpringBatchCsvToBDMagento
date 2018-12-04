@@ -15,8 +15,11 @@ public class DataSourceConfiguration {
 	@Autowired
 	DbConfig dbConfig;
 	
+	
 	@Bean
 	public DataSource getDataSource() {
+		
+		
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(dbConfig.getDriverClassName());
 		dataSource.setUrl(dbConfig.getUrl());
