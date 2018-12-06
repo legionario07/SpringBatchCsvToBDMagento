@@ -56,6 +56,9 @@ public class SaveItemProcessor implements ItemProcessor<Produto, Produto> {
 
 		// inserindo o Produto como Entidade
 		CatalogProdutoEntity catalogProdutoEntity = new CatalogProdutoEntity(4, saveItem.getEan());
+		if(catalogProdutoEntityRepository.findBySKU(catalogProdutoEntity.getSKU())!=null) {
+			return saveItem;
+		}
 		catalogProdutoEntity = catalogProdutoEntityRepository.save(catalogProdutoEntity);
 		logger.info("Inserindo na tabela catalog_product_entity: {}", catalogProdutoEntity);
 		saveItem.setEntityId(catalogProdutoEntity.getEntityId());
