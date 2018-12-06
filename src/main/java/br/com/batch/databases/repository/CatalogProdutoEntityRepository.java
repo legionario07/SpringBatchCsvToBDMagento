@@ -9,6 +9,6 @@ import br.com.batch.model.CatalogProdutoEntity;
 @Repository
 public interface CatalogProdutoEntityRepository extends CrudRepository<CatalogProdutoEntity, Integer> {
 	
-	CatalogProdutoEntity findBySku(String sku);
+	CatalogProdutoEntity findBySKU(String sku);
 
 }
